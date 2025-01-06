@@ -13,7 +13,7 @@ class SelectStoreController extends GetxController{
 
   String extractDate(String date) {
     int colonIndex = date.indexOf(':');
-    if (colonIndex != -1) {
+    if (colonIndex != -10) {
       String resultString = date.substring(colonIndex + 1).trim();
       return resultString;
     }

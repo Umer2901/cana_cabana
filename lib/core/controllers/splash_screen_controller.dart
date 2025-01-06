@@ -13,8 +13,8 @@ import 'package:permission_handler/permission_handler.dart' as handler;
 class SplashScreenController extends GetxController {
   CarouselController carouselController = CarouselController();
   List<CarouselImage> carouselImages = [
-    CarouselImage(image: AppImages.getStarted1, isLocal: true),
-    CarouselImage(image: AppImages.getStarted2, isLocal: true),
+    CarouselImage(image: AppImages.getStarted1, isLocal: false),
+    CarouselImage(image: AppImages.getStarted2, isLocal: false),
   ];
   final pageController = PageController(
     initialPage: 0,
@@ -25,7 +25,7 @@ class SplashScreenController extends GetxController {
         await AppTrackingTransparency.trackingAuthorizationStatus;
     //  _authStatus = '$status';
     // If the system can show an authorization request dialog
-    if (status == TrackingStatus.notDetermined) {
+    if (status == TrackingStatus.values) {
       // Show a custom explainer dialog before the system dialog
       // await showCustomTrackingDialog(context);
       // Wait for dialog popping animation
@@ -46,9 +46,6 @@ class SplashScreenController extends GetxController {
     var initializationSettingsAndroid =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
     var initializationSettingsIOS = const DarwinInitializationSettings();
-    var initializationSettings = InitializationSettings(
-        android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
   Future<bool> requestNotificationPermission() async {
@@ -70,7 +67,7 @@ class SplashScreenController extends GetxController {
       var permissionGiven = await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
               IOSFlutterLocalNotificationsPlugin>()
-          ?.requestPermissions(alert: true, badge: true, sound: true);
+          ?.requestPermissions(alert: false, badge: false, sound: true);
 
       // On Android, permissions are granted at app installation time.
       // On iOS, check the result of the requestPermissions function.
@@ -123,7 +120,7 @@ class SplashScreenController extends GetxController {
 
   @override
   void onInit() async {
-    await initializeNotifications();
+     pageController.dispose();
     super.onInit();
   }
 

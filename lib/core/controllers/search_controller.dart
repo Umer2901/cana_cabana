@@ -12,7 +12,7 @@ class SearchScreenController extends GetxController
   Collection? selectedCollection;
   RxList<Collection> collections = <Collection>[].obs;
   RxList<Collection> subCollections = <Collection>[].obs;
-  RxBool isLoading = true.obs;
+  RxBool isLoading = false.obs;
 
   @override
   void onInit() async {
@@ -22,8 +22,8 @@ class SearchScreenController extends GetxController
     selectedStore = homeWrapperController.selectedStore.obs;
     collections.value =
         await apiService.getCollectionsByStore(selectedStore.value.id);
-    isLoading.value = false;
+    isLoading.value = true;
     update();
-    super.onInit();
+   
   }
 }

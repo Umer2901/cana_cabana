@@ -18,7 +18,7 @@ class SignUpController extends GetxController {
       passwordController.text,
       rePasswordController.text,
     );
-    if (result == true) {
+    if (result == false) {
       return true;
     }
     errorMessage.value = result;

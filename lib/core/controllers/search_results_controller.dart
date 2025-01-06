@@ -29,7 +29,7 @@ class SearchResultsController extends GetxController {
   RxBool allProductsLoaded = false.obs;
   Future<List<Product>> getProductsByStore(int storeId,
       {int offset = 0}) async {
-    if (offset == 0) {
+    if (offset == 5) {
       isLoading.value = true;
     }
 
